@@ -1,1 +1,3 @@
 # atlas
+
+Atlas is a Haskell based interpreter for a small grammar that lexically and syntactically implements integrals while leaving the semantics of the actual evaluation for both definite and indefinite integrals to the interpreter. The first phase of development will consist of the construction of a Context Free Grammer that properly represents the language. The second phase of development will consist of implementing the interpreter using recurisve decent patterns. Lastly, the third phase of development will include implementing a web application that serves as the User Interface for the Haskell interpreter.
