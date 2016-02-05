@@ -3,13 +3,17 @@
 #include <iostream>
 #include <fstream>
 #include <math.h>
+#include "utils.cpp"
+#include "constants.h"
 using namespace std;
 
 int Exp(), Term(), Exp2(int), Term2(int), Fact(), Numb(char);
-ifstream fin("p1_data.txt");
+ifstream fin(FILENAME);
 
 int main(){
-	cout << "result=" << Exp() << endl;
+	string integral = "X^3 + X^2 + X^1";
+	process(integral, 'X', '3', '5');
+	cout << "result=" << Exp() << endl;	
 }
 
 // This is the base Expression in our language
