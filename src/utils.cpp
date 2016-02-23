@@ -1,9 +1,10 @@
+#include <iostream>
 #include <string>
 #include <fstream>
 #include "constants.h"
 using namespace std;
 
-void add_input(string input);
+void add_input(string input), print_file(string file_name), clear(string file_name);
 void process(string input, char var, char lower_lim, char upper_lim);
 string package(string indef_int, char var, char limit);
 string create_infix(string indef_int, char var, char lower_lim, char upper_lim);
@@ -32,5 +33,24 @@ string package(string indef_int, char var, char limit){
 string create_infix(string indef_int, char var, char lower_lim, char upper_lim){
 	string definite_lower = package(indef_int, var, lower_lim);
 	string definite_higher = package(indef_int, var, upper_lim);
-	return "(" + definite_higher + ")" +"-" + "(" + definite_lower + ")";
+	return "(" + definite_higher + ")" + "-" + "(" + definite_lower + ")";
+}
+
+// Not used
+void clear(string file_name){
+	ofstream stream;
+	stream.open(file_name, std::ofstream::out | std::ofstream::trunc);
+	stream.close();
+}
+
+// Not used 
+void print_file(string file_name){
+    string getcontent;
+    ifstream openfile(file_name);
+    if(openfile.is_open()){
+        while(!openfile.eof()){
+            getline(openfile, getcontent);
+            cout << getcontent << endl;
+        }
+    }
 }
