@@ -16,8 +16,9 @@ void process(string input, char var, char lower_lim, char upper_lim){
 }
 
 void add_input(string input){
+	clear(FILENAME);
 	ofstream input_data(FILENAME);
-	input_data << input << "\n";
+	input_data << input;
 	input_data.close();
 }
 
@@ -36,7 +37,6 @@ string create_infix(string indef_int, char var, char lower_lim, char upper_lim){
 	return "(" + definite_higher + ")" + "-" + "(" + definite_lower + ")";
 }
 
-// Not used
 void clear(string file_name){
 	ofstream stream;
 	stream.open(file_name, std::ofstream::out | std::ofstream::trunc);

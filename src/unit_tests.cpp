@@ -6,10 +6,10 @@
 #include "infix.h"
 #include "utils.h"
 #include "constants.h"
-#define NUM_TESTS 3
+#define NUM_TESTS 4
 using namespace std;
 
-bool test_process(), test_expression(), run_tests();
+bool test_process(), test_exp_1(), test_exp_2(), test_exp_3(), run_tests();
 typedef bool (*FP)();
 
 template<typename T>
@@ -28,15 +28,15 @@ int main(){
 bool run_tests(){
 	bool testsPass = true;
 	FP test_funcs[NUM_TESTS]= {
-		&test_expression,
-		&test_expression,
-		&test_expression
-		// &test_process
+		&test_exp_1,
+		&test_exp_2,
+		&test_exp_3,
+		&test_process
 	};
 	for(int i = 0; i < NUM_TESTS; i++){
 		cout << "TEST: " << i << endl;
 		testsPass = testsPass & test_funcs[i]();
-		
+		cout << endl;
 	} 
 	if(testsPass){
 		cout << "Output: all tests pass" << endl;
@@ -46,11 +46,20 @@ bool run_tests(){
 	return testsPass;
 }
 
-bool test_expression(){
+bool test_exp_1(){
 	add_input("((3+3)^2)/2");
-	int output = Exp();
-	// print_file(FILENAME);
-	return test(18, output);
+	return test(18, ExpStart());
+}
+
+bool test_exp_2(){
+	add_input("9^2");
+	return test(81, ExpStart());
+}
+
+// Tests right associativity of exponentiation operator
+bool test_exp_3(){
+	add_input("4^3^2^1");
+	return test(262144, ExpStart());
 }
 
 bool test_process(){
@@ -58,7 +67,6 @@ bool test_process(){
 	// to create an infix expression
 	string integral = "X^3 + X^2 + X^1";
 	process(integral, 'X', '3', '5');
-	int output = Exp();
-	return test(116, output);
+	return test(116, ExpStart());
 }
 

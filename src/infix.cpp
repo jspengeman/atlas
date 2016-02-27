@@ -6,13 +6,21 @@
 #include "constants.h"
 using namespace std;
 
-int Exp(), Term(), Exp2(int), Term2(int), Fact(), Numb(char);
+int Exp(), ExpStart(), Term(), Exp2(int), Term2(int), Fact(), Numb(char);
 ifstream fin(FILENAME);
 
 // This is the base Expression in our language
 // which contains an expression +/- a term
 // or it contains a term.
-int Exp(){ return Exp2(Term()); }
+int ExpStart(){
+	fin.clear();
+	fin.seekg(0, fin.beg);	
+	return Exp();
+}
+
+int Exp(){ 
+	return Exp2(Term());
+}
 
 // This is the base of the Term which is either
 // a Term * a Factor or a Term / Factor or a Term
