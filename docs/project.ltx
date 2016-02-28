@@ -47,7 +47,6 @@ Now let's begin with the formal definition of our intermediate grammar's product
 	Expression \rightarrow Expression + Term \ | \ Expression - Term \ | \ Term
 \end{equation}
 
-
 \begin{equation}
 	Term \rightarrow Term \times Factor \ | \ Term \div Factor \ | \ Factor
 \end{equation}
@@ -57,11 +56,21 @@ Now let's begin with the formal definition of our intermediate grammar's product
 \end{equation}
 
 \begin{equation}
-	Number \rightarrow 0 \ | \ 1 \ | \ 2 \ | \ ... \  | \ 9 \ | \ (Expression) 
+	Number \rightarrow Digits \ | \ (Expression) 
+\end{equation}
+
+\begin{equation}
+	Digits \rightarrow 0 \ | \ 1 \ | \ 2 \ | \ ... \  | \ 9 \ | \ Digits
 \end{equation}
 
 \vspace{5mm}
-The start symbol would be Expression and the terminals would be the set $\big\{ \ 0, \ 1,\ 2 ...\ 9 \big\}$ while the nonterminals are the set $\big\{ \ Expression, \ Term, \ Factor, \ Number \ \big\}$. With this grammar and an interpreter that implements that grammar we would be able to input any definite integral that has been expanded at both of its limits of integration as we displayed earlier. This grammar and part of the interpreter is utilitarian and does not define the grammar that will be used as the input to this interpreter. 
+The start symbol would be Expression and the terminals would be the set $\big\{ \ 0, \ 1,\ 2 ...\ 9 \big\}$ while the nonterminals are the set that consist of: 
+
+\begin{equation}
+	\big\{ \: Expression, \: Term, \: Factor,  \: Number,  \: Digits \: \big\} . 
+\end{equation}
+
+With this grammar and an interpreter that implements that grammar we would be able to input any definite integral that has been expanded at both of its limits of integration as we displayed earlier. This grammar and part of the interpreter is utilitarian and does not define the grammar that will be used as the input to this interpreter but it does not mean the interpreter could not evaluate an infix expression. 
 
 \section{Conclusion}
 Write your conclusion here.
