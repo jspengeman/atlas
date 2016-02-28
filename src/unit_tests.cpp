@@ -6,10 +6,10 @@
 #include "infix.h"
 #include "utils.h"
 #include "constants.h"
-#define NUM_TESTS 4
+#define NUM_TESTS 6
 using namespace std;
 
-bool test_process(), test_exp_1(), test_exp_2(), test_exp_3(), run_tests();
+bool test_exp_1(), test_exp_2(), test_exp_3(), test_package(), test_infix(), test_process(), run_tests();
 typedef bool (*FP)();
 
 template<typename T>
@@ -31,6 +31,8 @@ bool run_tests(){
 		&test_exp_1,
 		&test_exp_2,
 		&test_exp_3,
+		&test_package,
+		&test_infix,
 		&test_process
 	};
 	for(int i = 0; i < NUM_TESTS; i++){
@@ -46,11 +48,13 @@ bool run_tests(){
 	return testsPass;
 }
 
+// Tests a non trivial string for infix
 bool test_exp_1(){
 	add_input("((3+3)^2)/2");
 	return test(18, ExpStart());
 }
 
+// Tests basic exponentiation operation
 bool test_exp_2(){
 	add_input("9^2");
 	return test(81, ExpStart());
@@ -62,9 +66,22 @@ bool test_exp_3(){
 	return test(262144, ExpStart());
 }
 
+// Tests util functionality to create one half of a definte integral
+bool test_package(){
+	string integral = "3*X^5+X^3";
+	string expected = "3*3^5+3^3";
+	return test(expected, package(integral, 'X', '3'));
+}
+
+// Tests util functionality ton create a definite integral
+bool test_infix(){
+	string integral = "X^3+X^2+X^1";
+	string expected = "(5^3+5^2+5^1)-(3^3+3^2+3^1)";
+	return test(expected, create_infix(integral, 'X', '3', '5'));
+}
+
+// Tests evaulation functionality of an indefinte integral
 bool test_process(){
-	// Test the process functions ability
-	// to create an infix expression
 	string integral = "X^3 + X^2 + X^1";
 	process(integral, 'X', '3', '5');
 	return test(116, ExpStart());
