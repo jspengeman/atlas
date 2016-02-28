@@ -6,10 +6,10 @@
 #include "infix.h"
 #include "utils.h"
 #include "constants.h"
-#define NUM_TESTS 6
+#define NUM_TESTS 7
 using namespace std;
 
-bool test_exp_1(), test_exp_2(), test_exp_3(), test_package(), test_infix(), test_process(), run_tests();
+bool test_exp_1(), test_exp_2(), test_exp_3(), test_exp_4(), test_package(), test_infix(), test_process(), run_tests();
 typedef bool (*FP)();
 
 template<typename T>
@@ -31,6 +31,7 @@ bool run_tests(){
 		&test_exp_1,
 		&test_exp_2,
 		&test_exp_3,
+		&test_exp_4,
 		&test_package,
 		&test_infix,
 		&test_process
@@ -64,6 +65,12 @@ bool test_exp_2(){
 bool test_exp_3(){
 	add_input("4^3^2^1");
 	return test(262144, ExpStart());
+}
+
+// Tests the abilitity to have multiple digits in the string
+bool test_exp_4(){
+	add_input("(1000/20)/2*10-250");
+	return test(0, ExpStart());
 }
 
 // Tests util functionality to create one half of a definte integral

@@ -7,6 +7,7 @@
 using namespace std;
 
 int Exp(), ExpStart(), Term(), Exp2(int), Term2(int), Fact(), Numb(char);
+string Digits(char, string);
 ifstream fin(FILENAME);
 
 // This is the base Expression in our language
@@ -90,7 +91,24 @@ int Numb(char a){
 		result = Exp();
 		char x = fin.get();
 	}
-	else
-		result = int(a - '0');
+	else {
+		string number(1, a);
+		int num = stoi(Digits(a, number));
+		result = num;
+	}
 	return result;
+}
+
+// This function handles the part of the language that describes
+// describes the grammar as containing a string that is a single  
+// digit or mutiple digits potentially
+string Digits(char a, string total){
+	if(!isdigit(a)){
+		fin.putback(a);
+		total.pop_back();
+		return total;
+	}
+	char digit = fin.get();
+	total.push_back(digit);
+	return Digits(digit, total);
 }
