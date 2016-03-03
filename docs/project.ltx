@@ -52,7 +52,7 @@ Now let's begin with the formal definition of our intermediate grammar's product
 \end{equation}
 
 \begin{equation}
-	Factor \rightarrow Number \ | \ Number^Factor 
+	Factor \rightarrow Number \ | \ Number \wedge Factor 
 \end{equation}
 
 \begin{equation}
@@ -71,6 +71,53 @@ The start symbol would be Expression and the terminals would be the set $\big\{ 
 \end{equation}
 
 With this grammar and an interpreter that implements that grammar we would be able to input any definite integral that has been expanded at both of its limits of integration as we displayed earlier. This grammar and part of the interpreter is utilitarian and does not define the grammar that will be used as the input to this interpreter but it does not mean the interpreter could not evaluate an infix expression. 
+
+\subsection{Input Grammar}
+Now that we have an intermediate grammar that we can use to evaluate our definite integrals, we can define our input grammar. This grammar is throughly more complex then the intermediate grammar discussed above. It is a continual work in progress currently and I am leaving parts of the grammar open for expansion so we can add more functionality to our interpreter later. It is worth mentioning that some non-terminals are used from the above grammar as well and they remain the same as the above grammar unless specified other wise. The starting symbol for our grammar will be the non-terminal named Input the following elements make up the grammars productions:
+
+\begin{equation}
+	Input \rightarrow Integral \ | \ Derivative \ | \ Expression
+\end{equation}
+
+\begin{equation}
+	Integral \rightarrow int \ Equation \ dx \ [ \ between \ Digits \ and \ Digits \ ]
+\end{equation}
+
+\begin{equation}
+	Equation \rightarrow Polynomial \ | \ ... \ | \ ?
+\end{equation}
+
+\begin{equation}
+	Polynomial \rightarrow Polynomial + Term  | Polynomial - Term | Term
+\end{equation}
+
+\begin{equation}
+	Term \rightarrow Term \times Factor \ | \ Term \div Factor \ | \ Factor
+\end{equation}
+
+\begin{equation}
+	Factor \rightarrow Nomial  | Nomial \wedge ( Digits | (Expression))
+\end{equation}
+
+\begin{equation}
+	Monomial \rightarrow [Digits] \ A \ | \ B | \ C \ | \ ... \ z
+\end{equation}
+
+\begin{equation}
+	Digits \rightarrow 0 \ | \ 1 \ | \ 2 \ | \ ... \  | \ 9 \ | \ Digits
+\end{equation}
+
+The set that makes up our non-terminals would be:
+
+\begin{eqnarray*}
+	\big\{ \: Input, \: Integral, \: Equation, \: Polynomial, \: Term, \: \\ Factor, \: Monomial, \: Digits, \: Expression,  \: \big\} 
+\end{eqnarray*}
+
+And the following containing all alphanumeric characters makes up our set of terminals:
+
+\begin{equation}
+	\big\{ \: 0, \: 1, \: 2 :\ ... \: 9, \: A, \: B, \: C \: ... \: z  \:  \big\} 
+\end{equation}
 
 \section{Conclusion}
 Write your conclusion here.
