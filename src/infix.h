@@ -1,1 +1,1 @@
-int Exp(), ExpStart(), Term(), Exp2(int), Term2(int), Fact(), Numb(char);
+double Exp(), ExpStart(), Term(), Exp2(double), Term2(double), Fact(), Numb(double);

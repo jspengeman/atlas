@@ -6,32 +6,32 @@
 #include "constants.h"
 using namespace std;
 
-int Exp(), ExpStart(), Term(), Exp2(int), Term2(int), Fact(), Numb(char);
+double Exp(), ExpStart(), Term(), Exp2(double), Term2(double), Fact(), Numb(char);
 string Digits(char, string);
 ifstream fin(FILENAME);
 
 // This is the base Expression in our language
 // which contains an expression +/- a term
 // or it contains a term.
-int ExpStart(){
+double ExpStart(){
 	fin.clear();
 	fin.seekg(0, fin.beg);	
 	return Exp();
 }
 
-int Exp(){ 
+double Exp(){ 
 	return Exp2(Term());
 }
 
 // This is the base of the Term which is either
 // a Term * a Factor or a Term / Factor or a Term
-int Term(){ return Term2(Fact()); } 
+double Term(){ return Term2(Fact()); } 
 
 // Exp2 handles the logic that would take place
 // to parse this part of the language dealing 
 // with addition and subtraction
-int Exp2(int inp){
-	int result = inp;
+double Exp2(double inp){
+	double result = inp;
 	char a;
 	if (!fin.eof()){
 		a = fin.get();
@@ -48,8 +48,8 @@ int Exp2(int inp){
 // Term2 handles the logic that the language
 // requires if the potential operation is going
 // to be multiplication or division
-int Term2(int inp){
-	int result = inp; 
+double Term2(double inp){
+	double result = inp; 
 	char a;
 	if (!fin.eof()){
 		a = fin.get();
@@ -70,8 +70,8 @@ int Term2(int inp){
 // it is the inbetween function for term and number so
 // if something is a term it can be either a number of
 // a number and a factor
-int Fact(){
-	int result = 0;
+double Fact(){
+	double result = 0;
 	char a = fin.get();
 	result = Numb(a);
 	a = fin.get();
@@ -85,15 +85,15 @@ int Fact(){
 // This function handles the part of the language that could
 // be described by either being a number of by being an expression
 // surrounded by parenthesis so that it has the highest precedence
-int Numb(char a){
-	int result;
+double Numb(char a){
+	double result;
 	if (a == '('){
 		result = Exp();
 		char x = fin.get();
 	}
 	else {
 		string number(1, a);
-		int num = stoi(Digits(a, number));
+		double num = stod(Digits(a, number));
 		result = num;
 	}
 	return result;
@@ -103,7 +103,7 @@ int Numb(char a){
 // describes the grammar as containing a string that is a single  
 // digit or mutiple digits potentially
 string Digits(char a, string total){
-	if(!isdigit(a)){
+	if(!isdigit(a) && a != '.'){
 		fin.putback(a);
 		total.pop_back();
 		return total;
