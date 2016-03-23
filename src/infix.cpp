@@ -3,11 +3,10 @@
 #include <iostream>
 #include <fstream>
 #include <math.h>
+#include "infix.h"
 #include "constants.h"
 using namespace std;
 
-double Exp(), ExpStart(), Term(), Exp2(double), Term2(double), Fact(), Numb(char);
-string Digits(char, string);
 ifstream fin(FILENAME);
 
 // This is the base Expression in our language
