@@ -1,16 +1,32 @@
+#include <iostream>
 #include <fstream>
 #include <string>
 #include "infix.h"
+#include "constants.h"
 using namespace std;
 
-ifstream data("data.txt");
+// Might be troublesome to use same file
+ifstream data(FILENAME);
+double Input(), Integral(), Derivative(), Equation(), Polynomial(), Monomial(), Coefiencet(char, string);
 
 double Input(){
-	return 0;
+	string operation;
+	data >> operation;
+	
+	if (operation == INTEGRATE)
+		return Integral();
+	else if (operation == DERIVE)
+		return Derivative();
+	else
+		return 0;
 }
 
 double Integral(){
-	return 0;	
+	return Equation();	
+}
+
+double Derivative(){
+	return 0;
 }
 
 double Equation(){
