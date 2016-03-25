@@ -103,7 +103,6 @@ string Digits(char a, string total){
 	if(!isdigit(a) && a != '.'){
 		fin.putback(a);
 		total.pop_back();
-		cout << total << endl;
 		return total;
 	}
 	char digit = fin.get();

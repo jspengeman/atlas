@@ -49,8 +49,12 @@ string Monomial(){
 		} 
 		else if (isdigit(a)){
 			string coef = Monomial2(a);
-			return coef + Monomial();
+			data.seekg(coef.length(), data.beg);
+			string var = Monomial();
+			return coef + var;
 		}
+	} else {
+		return "";
 	}
 	
 }
