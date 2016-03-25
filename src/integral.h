@@ -1,4 +1,5 @@
 #include <string>
 using namespace std;
 
-double Input(), Integral(), equation(), polynomial(), Nomial(), coefiencet(char, string);
+double Input(), Integral(), Equation(), polynomial();
+string Monomial(), Coefiencet(char, string);

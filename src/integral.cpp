@@ -7,12 +7,15 @@ using namespace std;
 
 // Might be troublesome to use same file
 ifstream data(FILENAME);
-double Input(), Integral(), Derivative(), Equation(), Polynomial(), Monomial(), Coefiencet(char, string);
+double Input(), Integral(), Derivative(), Equation(), Polynomial();
+string Monomial(), Monomial2(char), Coefiencet(char, string);
 
+// Operation mutliplexor, distributes to
+// correct grammar based on the type of
+// equation that is used as input
 double Input(){
 	string operation;
-	data >> operation;
-	
+	data >> operation;	
 	if (operation == INTEGRATE)
 		return Integral();
 	else if (operation == DERIVE)
@@ -37,12 +40,28 @@ double Polynomial(){
 	return 0;
 }
 
-double Monomial(){
-	return 0;
+string Monomial(){
+	if(!data.eof()){
+		char a = data.get();
+		if(isalpha(a)){
+			string num(1, a);
+			return num;
+		} 
+		else if (isdigit(a)){
+			string coef = Monomial2(a);
+			return coef + Monomial();
+		}
+	}
+	
 }
 
-double Coefiencet(char a, string total){
-	return stod(Digits(a, total));
+string Monomial2(char a){
+	string num;
+	return Coefiencet(a, num);
+}
+
+string Coefiencet(char a, string total){
+	return Digits(a, total);
 }
 
 

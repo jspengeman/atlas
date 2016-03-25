@@ -18,9 +18,7 @@ double ExpStart(){
 	return Exp();
 }
 
-double Exp(){ 
-	return Exp2(Term());
-}
+double Exp(){ return Exp2(Term()); }
 
 // This is the base of the Term which is either
 // a Term * a Factor or a Term / Factor or a Term
@@ -105,6 +103,7 @@ string Digits(char a, string total){
 	if(!isdigit(a) && a != '.'){
 		fin.putback(a);
 		total.pop_back();
+		cout << total << endl;
 		return total;
 	}
 	char digit = fin.get();
