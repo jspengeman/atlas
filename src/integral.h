@@ -2,4 +2,4 @@
 using namespace std;
 
 double Input(), Integral(), Equation(), polynomial();
-string Monomial(), Coefiencet(char, string);
+string TermInt(), FactorInt(), Monomial(), Monomial2(char), Coefiencet(char, string);

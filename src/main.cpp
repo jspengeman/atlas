@@ -17,6 +17,6 @@ int main(){
 	// cout << "output=" << Input() << endl;
 
 	add_input("123.825x");
-	cout << "output=" << Monomial() << endl;
+	cout << "output=" << FactorInt() << endl;
 }
 

@@ -8,7 +8,7 @@ using namespace std;
 // Might be troublesome to use same file
 ifstream data(FILENAME);
 double Input(), Integral(), Derivative(), Equation(), Polynomial();
-string Monomial(), Monomial2(char), Coefiencet(char, string);
+string TermInt(), FactorInt(), Monomial(), Monomial2(char), Coefiencet(char, string);
 
 // Operation mutliplexor, distributes to
 // correct grammar based on the type of
@@ -40,6 +40,25 @@ double Polynomial(){
 	return 0;
 }
 
+string TermInt(){
+	return "";
+}
+
+string FactorInt(){
+	string monomial = Monomial();
+	char a = data.get();
+	if(a == '^'){
+		char a_prime = data.get();
+		string num;
+		string pw(1, a);
+		string exponent = Digits(a_prime, num, monomial.length() + 1);
+		data.seekg(exponent.length(), data.beg);
+		monomial = monomial + pw + exponent;
+	} else 
+		data.putback(a);
+	return monomial;
+}
+
 string Monomial(){
 	if(!data.eof()){
 		char a = data.get();
@@ -53,10 +72,8 @@ string Monomial(){
 			string var = Monomial();
 			return coef + var;
 		}
-	} else {
-		return "";
 	}
-	
+	return "";
 }
 
 string Monomial2(char a){
@@ -65,7 +82,7 @@ string Monomial2(char a){
 }
 
 string Coefiencet(char a, string total){
-	return Digits(a, total);
+	return Digits(a, total, 0);
 }
 
 

@@ -90,7 +90,7 @@ double Numb(char a){
 	}
 	else {
 		string number(1, a);
-		double num = stod(Digits(a, number));
+		double num = stod(Digits(a, number, 0));
 		result = num;
 	}
 	return result;
@@ -99,7 +99,8 @@ double Numb(char a){
 // This function handles the part of the language that describes
 // describes the grammar as containing a string that is a single  
 // digit or mutiple digits potentially
-string Digits(char a, string total){
+string Digits(char a, string total, int pos){
+	if (pos != 0){ fin.seekg(pos, fin.beg); }
 	if(!isdigit(a) && a != '.'){
 		fin.putback(a);
 		total.pop_back();
@@ -107,5 +108,5 @@ string Digits(char a, string total){
 	}
 	char digit = fin.get();
 	total.push_back(digit);
-	return Digits(digit, total);
+	return Digits(digit, total, 0);
 }
