@@ -4,12 +4,14 @@
 #include <fstream>
 #include <cmath>
 #include "infix.h"
+#include "integral.h"
 #include "utils.h"
 #include "constants.h"
-#define NUM_TESTS 8
+#define NUM_TESTS 9
 using namespace std;
 
-bool test_exp_1(), test_exp_2(), test_exp_3(), test_exp_4(), test_exp_5(), test_package(), test_infix(), test_process(), run_tests();
+bool test_exp_1(), test_exp_2(), test_exp_3(), test_exp_4(), test_exp_5(), 
+test_package(), test_infix(), test_process(), test_factor_int(), run_tests();
 bool double_equals(double a, double b, double epsilon);
 typedef bool (*FP)();
 
@@ -43,14 +45,15 @@ bool run_tests(){
 	bool testsPass = true;
 	bool testResults[NUM_TESTS];
 	FP test_funcs[NUM_TESTS]= {
+		&test_factor_int,
+		&test_process,
+		&test_package,
+		&test_infix,
 		&test_exp_1,
 		&test_exp_2,
 		&test_exp_3,
 		&test_exp_4,
-		&test_exp_5,
-		&test_package,
-		&test_infix,
-		&test_process
+		&test_exp_5
 	};
 	for(int i = 0; i < NUM_TESTS; i++){
 		cout << "TEST: " << i << endl;
@@ -117,5 +120,12 @@ bool test_process(){
 	string integral = "X^3 + X^2 + X^1";
 	process(integral, 'X', '3', '5');
 	return test_dbl(116.0, ExpStart());
+}
+
+bool test_factor_int(){
+	clear(FILENAME);
+	string factor = "123.825x^2";
+	add_input("123.825x^2");
+	return test_str(factor, FactorInt());
 }
 
