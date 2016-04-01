@@ -18,7 +18,6 @@ void resetInt(){
 // correct grammar based on the type of
 // equation that is used as input
 double Input(){
-	resetInt();
 	string operation;
 	data >> operation;
 	double output;	
@@ -29,8 +28,8 @@ double Input(){
 	else
 		output = 0;
 
-	// resetInt(); NEED TO RESET HERE
-	// but cant because of seg fault
+	resetInt();
+	resetExp();
 	return output;
 }
 
@@ -67,9 +66,7 @@ string TermInt(){
 	if(!data.eof()){
 		char a = data.get();
 		string op(1, a);
-		if (a == '*'){
-			result = result + op + FactorInt();
-		} else if (a == '/'){
+		if (a == '*' || a == '/'){
 			result = result + op + FactorInt();
 		} else if (a == '+' || a == '-'){
 			data.putback(a);
@@ -81,17 +78,8 @@ string TermInt(){
 }
 
 string FactorInt(){
-	// TODO: its in pos 3 for somereason
-	// not sure why but it has to do with
-	// calling input before we call this
-	// function which messes with data
-	cout << "pos:" << data.tellg() << endl;
 	string monomial = Monomial();
-
-	// Monomial is also returning nothing
-	cout << "mono: " << monomial << endl;
 	char a = data.get();
-	cout << "a: " << a << endl;
 	if(a == '^'){
 		char a_prime = data.get();
 		string num;
