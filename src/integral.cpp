@@ -51,10 +51,12 @@ string Polynomial(){
 	if(!data.eof()){
 		char a = data.get();
 		if(a == '+' || a == '-'){
-			string op(1, a);
-			result = Polynomial() + op + TermInt();
+			// Not sure what to put here
+			return "";
 		} else {
-			data.putback(a);
+			string term = TermInt();
+			data.seekg(term.length(), data.beg);
+			return term + Polynomial();
 		}
 	}
 	return result;
@@ -71,7 +73,7 @@ string TermInt(){
 		} else if (a == '+' || a == '-'){
 			data.putback(a);
 		} else {
-			data.putback(a);
+			return FactorInt();
 		}
 	}
 	return result;

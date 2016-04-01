@@ -16,9 +16,7 @@ int main(){
 	add_input("int x^2 between 1 and 2");
 	cout << "output=" << Input() << endl;
 
-	resetInt();
-	resetExp();
-	add_input("123.825x^2");
-	cout << "output=" << FactorInt() << endl;
+	add_input("123.825x^2+x");
+	cout << "output=" << Polynomial() << endl;
 }
 
