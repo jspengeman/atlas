@@ -2,26 +2,36 @@
 #include <fstream>
 #include <string>
 #include "infix.h"
+#include "integral.h"
 #include "constants.h"
 using namespace std;
 
 // Might be troublesome to use same file
 ifstream data(FILENAME);
-double Input(), Integral(), Derivative(), Equation();
-string TermInt(), FactorInt(), Monomial(), Monomial2(char), Coefiencet(char, string), Polynomial();
+
+void resetInt(){
+	data.clear();
+	data.seekg(0, data.beg);	
+}
 
 // Operation mutliplexor, distributes to
 // correct grammar based on the type of
 // equation that is used as input
 double Input(){
+	resetInt();
 	string operation;
-	data >> operation;	
+	data >> operation;
+	double output;	
 	if (operation == INTEGRATE)
-		return Integral();
+		output = Integral();
 	else if (operation == DERIVE)
-		return Derivative();
+		output = Derivative();
 	else
-		return 0;
+		output = 0;
+
+	// resetInt(); NEED TO RESET HERE
+	// but cant because of seg fault
+	return output;
 }
 
 double Integral(){
@@ -71,8 +81,17 @@ string TermInt(){
 }
 
 string FactorInt(){
+	// TODO: its in pos 3 for somereason
+	// not sure why but it has to do with
+	// calling input before we call this
+	// function which messes with data
+	cout << "pos:" << data.tellg() << endl;
 	string monomial = Monomial();
+
+	// Monomial is also returning nothing
+	cout << "mono: " << monomial << endl;
 	char a = data.get();
+	cout << "a: " << a << endl;
 	if(a == '^'){
 		char a_prime = data.get();
 		string num;

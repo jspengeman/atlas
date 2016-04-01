@@ -12,9 +12,13 @@ ifstream fin(FILENAME);
 // This is the base Expression in our language
 // which contains an expression +/- a term
 // or it contains a term.
-double ExpStart(){
+void resetExp(){
 	fin.clear();
 	fin.seekg(0, fin.beg);	
+}
+
+double ExpStart(){
+	resetExp();
 	return Exp();
 }
 
