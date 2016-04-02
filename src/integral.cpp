@@ -53,9 +53,8 @@ string Polynomial(){
 		char a = data.get();
 		if(a == '+' || a == '-'){
 			string op(1, a);
-			// Not sure what to put here
 			// TODO: this needs to implement the recursive returning of elements
-			return op + FactorInt();
+			return op + TermInt();
 		} else {
 			string term = TermInt();
 			data.seekg(term.length(), data.beg);
@@ -65,19 +64,20 @@ string Polynomial(){
 	return result;
 }
 
-// This is fine now, I think
+// TODO: Fix this function to have recursive traversal of string
 string TermInt(){
 	cout << "TEST 1" << endl;
 	string result;
 	if(!data.eof()){
 		char a = data.get();
 		string op(1, a);
+		cout << "op: " << op << endl;
 		if (a == '*' || a == '/'){
 			result = result + op + FactorInt();
 		} else if (a == '+' || a == '-'){
 			data.putback(a);
 		} else {
-			return FactorInt();
+			result = FactorInt();
 		}
 	}
 	return result;
@@ -88,10 +88,10 @@ string FactorInt(){
 	string monomial = Monomial();
 	char a = data.get();
 	if(a == '^'){
-		cout << "mono 0: " << data.tellg() << endl; 
 		char a_prime = data.get();
 		string num;
 		string op(1, a);
+
 		// This only allows for numbers as exponents not expressions
 		string exponent = Digits(a_prime, num, monomial.length() + 1);
 		data.seekg(exponent.length(), data.beg);
@@ -101,18 +101,15 @@ string FactorInt(){
 	return monomial;
 }
 
-// TODO: Fix the infinite loop and remove print statements
 string Monomial(){
 	cout << "TEST 3" << endl;
 	if(!data.eof()){
 		char a = data.get();
 		if(isalpha(a)){
-			cout << "mono 1: " << a << endl;
 			string var(1, a);
 			return var;
 		} 
 		else if (isdigit(a)){
-			cout << "mono 2: " << a << endl;
 			string coef = Monomial2(a);
 			data.seekg(coef.length(), data.beg);
 			string var = Monomial();
