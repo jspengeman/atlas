@@ -73,11 +73,16 @@ string TermInt(){
 		string op(1, a);
 		cout << "op: " << op << endl;
 		if (a == '*' || a == '/'){
-			result = result + op + FactorInt();
+			string fact = FactorInt();
+			string term = TermInt();
+			result = term + op + fact;
 		} else if (a == '+' || a == '-'){
+			// Let Polynomial handle these operations
 			data.putback(a);
-		} else {
-			result = FactorInt();
+		} else if (isalnum(a)){
+			// Only reads a factor and not anything else afterwards
+			string fact = FactorInt();
+			result = fact;
 		}
 	}
 	return result;
@@ -103,20 +108,21 @@ string FactorInt(){
 
 string Monomial(){
 	cout << "TEST 3" << endl;
+	string result;
 	if(!data.eof()){
 		char a = data.get();
 		if(isalpha(a)){
 			string var(1, a);
-			return var;
+			result = var;
 		} 
 		else if (isdigit(a)){
 			string coef = Monomial2(a);
 			data.seekg(coef.length(), data.beg);
 			string var = Monomial();
-			return coef + var;
+			result = coef + var;
 		}
 	}
-	return "";
+	return result;
 }
 
 string Monomial2(char a){
