@@ -88,6 +88,7 @@ string TermInt(){
 	return result;
 }
 
+// This is working
 string FactorInt(){
 	cout << "TEST 2" << endl;
 	string monomial = Monomial();
@@ -127,10 +128,10 @@ string Monomial(){
 
 string Monomial2(char a){
 	string num;
-	return Coefiencet(a, num);
+	return Coefficient(a, num);
 }
 
-string Coefiencet(char a, string total){
+string Coefficient(char a, string total){
 	return Digits(a, total, 0);
 }
 

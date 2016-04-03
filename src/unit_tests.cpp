@@ -7,13 +7,19 @@
 #include "integral.h"
 #include "utils.h"
 #include "constants.h"
-#define NUM_TESTS 9
+#define NUM_TESTS 11
 using namespace std;
 
 bool test_exp_1(), test_exp_2(), test_exp_3(), test_exp_4(), test_exp_5(), 
-test_package(), test_infix(), test_process(), test_factor_int(), run_tests();
+test_package(), test_infix(), test_process(), test_factor_int(), run_tests(), test_monomial(), test_coefficent();
 bool double_equals(double a, double b, double epsilon);
+void reset();
 typedef bool (*FP)();
+
+void reset(){
+	resetInt();
+	resetExp();
+}
 
 bool double_equals(double a, double b, double epsilon = 0.001){
     return std::abs(a - b) < epsilon;
@@ -46,6 +52,8 @@ bool run_tests(){
 	bool testResults[NUM_TESTS];
 	FP test_funcs[NUM_TESTS]= {
 		&test_factor_int,
+		&test_monomial,
+		&test_coefficent,
 		&test_process,
 		&test_package,
 		&test_infix,
@@ -122,8 +130,22 @@ bool test_process(){
 	return test_dbl(116.0, ExpStart());
 }
 
+bool test_coefficent(){
+	reset();
+	string coef = "123.45";
+	string num;
+	add_input(coef);
+	return test_str(coef, Coefficient(coef[0], num));
+}
+
+bool test_monomial(){
+	reset();
+	string mono = "123.825x";
+	add_input(mono);
+	return test_str(mono, Monomial());
+}
+
 bool test_factor_int(){
-	clear(FILENAME);
 	string factor = "123.825x^2";
 	add_input("123.825x^2");
 	return test_str(factor, FactorInt());
