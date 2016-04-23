@@ -34,5 +34,7 @@ int main(){
 	resetExp();
 	add_input("123.825x^123*45+4");
 	cout << "output=" << TermInt() << endl;
+
+	integrate("int x^2 between 1 and 2");
 }
 

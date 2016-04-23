@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <sstream>
 #include "infix.h"
 #include "integral.h"
 #include "constants.h"
@@ -127,6 +128,40 @@ string Monomial2(char a){
 
 string Coefficient(char a, string total){
 	return Digits(a, total, 0);
+}
+
+// Not part of the grammar
+double integrate(string input){
+	int pos_btw = input.find("between");
+
+	int num_count = 0;
+	char A, B;
+	for(int i = pos_btw + 7; i < input.length(); i++){
+		if(isdigit(input[i])){
+			if(++num_count == 1){
+				A = input[i];
+			} else {
+				B = input[i];
+			}
+		}
+	}
+
+	input.erase(pos_btw, input.length());
+	input.erase(0, input.find(" "));
+	
+	string function;
+    string term;
+    istringstream iss(input);
+    while(iss >> term) {
+        cout << term << endl;
+
+        function += term;
+    }
+
+    cout << function << endl;
+	cout << A << endl;
+	cout << B << endl;
+	return 0.0;
 }
 
 
