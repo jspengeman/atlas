@@ -116,10 +116,12 @@ The set that makes up our non-terminals would be:
 And the following containing all alphanumeric characters makes up our set of terminals:
 
 \begin{equation}
-	\big\{ \: 0, \: 1, \: 2 :\ ... \: 9, \: A, \: B, \: C \: ... \: z  \:  \big\} 
+	\big\{ \: 0, \: 1, \: 2 \: ... \: 9, \: A, \: B, \: C \: ... \: z  \:  \big\} 
 \end{equation}
 
-\section{Conclusion}
-Write your conclusion here.
+Lastly, are start state would simply be an instance of Input which can be a derivative, Integral or an Expression.
+
+\section{The Interpreter}
+Based on the specified input grammar we should define a set of functions that recursively iterate through the string that was given as input. This is currently not implemented correctly but it is referred to as recursive decent pattern and it is used to turn any context free grammar into programming logic. The difference between the input grammar and the output grammar is that the input grammar just interprets the string and checks for validity while as the interpreter for the intermediate grammar interprets and also evaluates the infix expression.
 
 \end{document}
