@@ -30,9 +30,9 @@ int main(){
 	cout << "output=" << FactorInt() << endl;
 
 	// This and up are the broken parts
-	// resetInt();
-	// resetExp();
-	// add_input("123.825x^123*45");
-	// cout << "output=" << TermInt() << endl;
+	resetInt();
+	resetExp();
+	add_input("123.825x^123*45+4");
+	cout << "output=" << TermInt() << endl;
 }
 

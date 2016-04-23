@@ -47,7 +47,6 @@ double Equation(){
 
 // Not working 
 string Polynomial(){
-	cout << "TEST 0" << endl;
 	string result;
 	if(!data.eof()){
 		char a = data.get();
@@ -66,21 +65,17 @@ string Polynomial(){
 
 // TODO: Fix this function to have recursive traversal of string
 string TermInt(){
-	cout << "TEST 1" << endl;
 	string result;
 	if(!data.eof()){
 		char a = data.get();
 		string op(1, a);
-		cout << "op: " << op << endl;
 		if (a == '*' || a == '/'){
-			string fact = FactorInt();
-			string term = TermInt();
-			result = term + op + fact;
+			// Is an actual Term
 		} else if (a == '+' || a == '-'){
 			// Let Polynomial handle these operations
 			data.putback(a);
 		} else if (isalnum(a)){
-			// Only reads a factor and not anything else afterwards
+			// Is just a Factor
 			string fact = FactorInt();
 			result = fact;
 		}
@@ -90,7 +85,6 @@ string TermInt(){
 
 // This is working
 string FactorInt(){
-	cout << "TEST 2" << endl;
 	string monomial = Monomial();
 	char a = data.get();
 	if(a == '^'){
@@ -107,8 +101,8 @@ string FactorInt(){
 	return monomial;
 }
 
+// This is working
 string Monomial(){
-	cout << "TEST 3" << endl;
 	string result;
 	if(!data.eof()){
 		char a = data.get();
@@ -126,9 +120,9 @@ string Monomial(){
 	return result;
 }
 
+// This is working
 string Monomial2(char a){
-	string num;
-	return Coefficient(a, num);
+	string num; return Coefficient(a, num);
 }
 
 string Coefficient(char a, string total){
