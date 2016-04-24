@@ -154,13 +154,8 @@ double integrate(string input){
     istringstream iss(input);
     while(iss >> term) {
         cout << term << endl;
-
         function += term;
     }
-
-    cout << function << endl;
-	cout << A << endl;
-	cout << B << endl;
 	return 0.0;
 }
 
