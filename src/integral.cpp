@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <regex>
 #include "infix.h"
 #include "integral.h"
 #include "constants.h"
@@ -146,14 +147,40 @@ double integrate(string input){
 		}
 	}
 
+	// whole string first
+	// number second
+	// variable third
+	// carrot fourth
+	// exponent fifth
+
 	input.erase(pos_btw, input.length());
 	input.erase(0, input.find(" "));
-	
+
+	smatch sm; 
 	string function;
     string term;
     istringstream iss(input);
     while(iss >> term) {
-        cout << term << endl;
+    	// Monomial case
+    	if (term.length() > 1){
+	        cout << term << endl;
+
+	    	regex e("(\\d+)?(\\w)?(\\^)?(\\d+)?");
+		  	regex_match ( term.cbegin(), term.cend(), sm, e);
+
+		  	string coef = sm[1];
+		  	string var = sm[2];
+		  	string expo = sm[4];
+		  	
+		  	cout << "coef: " << coef << endl;
+		  	cout << "var: " << var << endl;
+		  	cout << "expo: " << expo << endl;
+
+		  	
+		// Operator case
+        } else {
+
+        }
         function += term;
     }
 	return 0.0;
