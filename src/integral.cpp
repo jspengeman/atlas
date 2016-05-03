@@ -163,7 +163,7 @@ double integrate(string input){
     while(iss >> term) {
     	// Monomial case
     	if (term.length() > 1){
-	        cout << term << endl;
+    		string output = "";
 
 	    	regex e("(\\d+)?(\\w)?(\\^)?(\\d+)?");
 		  	regex_match ( term.cbegin(), term.cend(), sm, e);
@@ -171,18 +171,46 @@ double integrate(string input){
 		  	string coef = sm[1];
 		  	string var = sm[2];
 		  	string expo = sm[4];
-		  	
-		  	cout << "coef: " << coef << endl;
-		  	cout << "var: " << var << endl;
-		  	cout << "expo: " << expo << endl;
 
+		  	// Factor case
+		  	if (expo.length() > 0){
+		  		int new_expo = stod(expo) + 1;
+
+		  		if (coef.length() > 0){
+		  			output = coef + "/" + to_string(new_expo) + "*";
+		  			output += var + "^" + to_string(new_expo);
+		  		} else {
+		  			output = var + "^" + to_string(new_expo);
+		  			output += "/" + to_string(new_expo);
+		  		}
+
+		  	// Constant case or not exponent case
+		  	} else {
+		  		// not exponent case
+		  		if (var.length() > 0){
+					if (coef.length() > 0){
+			  			output = coef + "/2*";
+			  			output += var + "^2";
+			  		} else {
+			  			output = var + "^2";
+			  			output += "/2";
+			  		}
+
+
+		  		// Constant case
+		  		} else {
+		  			int pos = function.length() - 1;
+		  			function.erase(pos, pos);
+		  		}
+		  	}
 		  	
+		  	function += output;
 		// Operator case
         } else {
-
+        	function += term;
         }
-        function += term;
     }
+    cout << "function: " << function << endl;
 	return 0.0;
 }
 

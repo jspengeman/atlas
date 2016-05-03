@@ -35,6 +35,6 @@ int main(){
 	add_input("123.825x^123*45+4");
 	cout << "output=" << TermInt() << endl;
 
-	integrate("int 3x^2 + 5x + 25 between 1 and 2");
+	integrate("int x^3 + 3x^2 + 5x + 25 between 1 and 2");
 }
 
