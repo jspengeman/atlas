@@ -4,6 +4,7 @@
 #include <sstream>
 #include <regex>
 #include "infix.h"
+#include "utils.h"
 #include "integral.h"
 #include "constants.h"
 using namespace std;
@@ -160,6 +161,7 @@ double integrate(string input){
 	string function;
     string term;
     istringstream iss(input);
+    string f_var;
     while(iss >> term) {
     	// Monomial case
     	if (term.length() > 1){
@@ -171,6 +173,10 @@ double integrate(string input){
 		  	string coef = sm[1];
 		  	string var = sm[2];
 		  	string expo = sm[4];
+
+		  	if(var.length() > 0){
+		  		f_var = var;
+		  	}
 
 		  	// Factor case
 		  	if (expo.length() > 0){
@@ -196,11 +202,9 @@ double integrate(string input){
 			  			output += "/2";
 			  		}
 
-
 		  		// Constant case
 		  		} else {
-		  			int pos = function.length() - 1;
-		  			function.erase(pos, pos);
+		  			output = coef + f_var;
 		  		}
 		  	}
 		  	
@@ -210,6 +214,11 @@ double integrate(string input){
         	function += term;
         }
     }
+
+    process(function, f_var[0], A, B);
+    double result = ExpStart();
+    cout << result << endl;
+
     cout << "function: " << function << endl;
 	return 0.0;
 }
