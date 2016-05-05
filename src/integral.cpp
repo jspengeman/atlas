@@ -164,7 +164,7 @@ double integrate(string input){
     string f_var;
     while(iss >> term) {
     	// Monomial case
-    	if (term.length() > 1){
+    	if (term.length() > 1 || isalpha(term[0])){
     		string output = "";
 
 	    	regex e("(\\d+)?(\\w)?(\\^)?(\\d+)?");
@@ -193,7 +193,7 @@ double integrate(string input){
 		  	// Constant case or not exponent case
 		  	} else {
 		  		// not exponent case
-		  		if (var.length() > 0){
+		  		if (var.length() > 0 or isalpha(var[0])){
 					if (coef.length() > 0){
 			  			output = coef + "/2*";
 			  			output += var + "^2";
@@ -204,7 +204,9 @@ double integrate(string input){
 
 		  		// Constant case
 		  		} else {
-		  			output = coef + f_var;
+		  			if (f_var.length() > 0)
+		  				f_var = "x";
+		  			output = coef + "*" + f_var;
 		  		}
 		  	}
 		  	
@@ -213,14 +215,13 @@ double integrate(string input){
         } else {
         	function += term;
         }
-    }
+    }	
 
     process(function, f_var[0], A, B);
     double result = ExpStart();
-    cout << result << endl;
 
-    cout << "function: " << function << endl;
-	return 0.0;
+    cout << "indefinte function: " << function << endl;
+	return result;
 }
 
 
